@@ -1,3 +1,7 @@
+
+
+## Introducción
+
 ###### Definición.
 
 Decimos que $x^* \in \R^n​$ es un **mínimo local** de $f : \R^n \to \R​$ continua si y solo si existe $r>0​$ tal que
@@ -24,6 +28,8 @@ $$
 f(x^*) \leq f(x) \quad \forall x \in \R^n
 $$
 
+
+
 ###### Teorema (condiciones necesarias de primer orden).
 
 Sean $f : \R^n \to \R​$, $x^* \in \R^n​$ tales que $f \in \mathcal{C}^1(\R^n)​$ y $x^*​$ es un mínimo local de $f(x)​$ entonces
@@ -40,6 +46,8 @@ $$
 2) \ & \nabla^2f(x^*) \ \text{Es simétrica semipositiva definida}
 \end{align*}
 $$
+
+
 
 ###### Teorema (condiciones suficientes de segundo orden).
 
@@ -150,7 +158,7 @@ $$
 R_{c_1} = g(0) + t(c_1 \cdot g'(0)) && \text{Wolfe 1} \\
 \end{align*}
 $$
-Escojemos $\hat{t} \geq 0$ es tal que 
+Escojemos $\hat{t} \geq 0​$ es tal que 
 $$
 \begin{align*}
 g(\hat{t}) \leq R_{c_1}(\hat{t}) && \text{(Wolfe 2)} \\
