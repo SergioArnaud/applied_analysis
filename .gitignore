@@ -25,3 +25,6 @@ __pycache__/
 
 # Keys
 *_keys.py
+
+# Octave
+octave_workspace
