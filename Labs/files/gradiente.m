@@ -18,10 +18,13 @@ function  [gfx] = gradiente(fname, x, h = 1.e-06)
     n = length(x);
     
     fx = feval(fname,x);                            
-    gfx = zeros(n,1);              
+    gfx = zeros(n,1);   
+    xt = x;
     
     for i = 1:n
-        fxh = feval(fname, x(i) + h*eye(n)(:,i));
-        gfx(i) = ( fxh - fx)/ h;
+        xt(i) = xt(i) + h;
+        fxh = feval(fname, xt);
+        gfx(i) = (fxh - fx)/h;
+        xt(i) = x(i);
     end
 end

@@ -1,13 +1,13 @@
 
-function [W,x,iter] = MetodoBL(fname, x, method='newton', line_search='quadratic',
-                               tol=1.e-04, maxiter = 50, maxjter = 30, c1 = 0.1)
-
+function [W,x,iter] = metodoblinterpol2(fname, x, method='newton', line_search='quadratic',
+                                        plot_iterations = true, tol=1.e-04, maxiter = 50, 
+                                        maxjter = 300, c1 = 0.1)
 %{
     Método de búsqueda de línea con la primer condición de Wolfe
     usando máximo descenso.
     usando los métodos de descenso:
-        1. Por coordenadas
-        2. Máximo descenso
+        1. Máximo descenso
+        2. Método de Newton
     Input:
         
         fname.- cadena de caracteres con el nombre de la función a minimizar.
@@ -38,13 +38,14 @@ function [W,x,iter] = MetodoBL(fname, x, method='newton', line_search='quadratic
         end
 
         %-----------------------------------------
-        % Búsqueda de línea
-        alfa  = 1;              % paso completo
-        xt = x + alfa*p;        % primer punto de prueba
-        f  = feval(fname,x);  % valor de la función
-        f1 = feval(fname, xt);% valor de la función en el punto de prueba
-        s  = p'*g;            % derivada direccional
-        jter = 0;             % iteraciones internas
+        %            Búsqueda de línea
+        
+        alfa  = 1;              
+        xt = x + alfa*p;        
+        f  = feval(fname,x);  
+        f1 = feval(fname, xt);
+        s  = p'*g;            
+        jter = 0;             
 
         if (abs(s) < 1.e-06)
             disp('No existe suficiente descenso  ')
@@ -53,6 +54,7 @@ function [W,x,iter] = MetodoBL(fname, x, method='newton', line_search='quadratic
         end
 
         while( (f1>f+alfa*c1*s) && jter < maxjter)  % búsqueda de línea
+        
             if (strcmp(line_search,'linear'))
                 alfa = alfa/2;
                 xt = x + alfa*p;
@@ -67,38 +69,41 @@ function [W,x,iter] = MetodoBL(fname, x, method='newton', line_search='quadratic
                 jter = jter +1;    
             end
         end   
-        % Fin de búsqueda de línea
-        %----------------------------------------------------------------------
+        
+        %          Fin de búsqueda de línea
+        %------------------------------------------
         
         
-        %--------------------------------------------------------------
-        % Graficación
-        
-        t = linspace(0,1,50)';
-        ft = zeros(50,1); rt = zeros(50,1);
-        for k = 1:50        
-            ft(k) = feval(fname, x+t(k)*p);  % función 
-            rt(k) = fx + t(k)*(c1*p'*g);
-        end
-        
-        fx = feval(fname,x+alfa*p);
-        
-        plot(t,ft,'--b',t,rt,'--m',alfa,fx,'dr', 'LineWidth',3)
-        title('Gráfica de búsqueda de línea','Fontsize',16)
-        xlabel('EJE  T','Fontsize',16)
-        ylabel(' f(x + tp)','Fontsize',16  )
-        legend('f(x)','recta','punto')
-        pause
+        %------------------------------------------
+        %                Graficación
 
-        % Fin de graficación
-        %-----------------------------------------------------  
-          
+        if (plot_iterations == true)
+        
+            t = linspace(0,1,50)';
+            ft = zeros(50,1); rt = zeros(50,1);
+            for k = 1:50        
+                ft(k) = feval(fname, x+t(k)*p);  % función 
+                rt(k) = fx + t(k)*(c1*p'*g);
+            end
+
+            fx = feval(fname,x+alfa*p);
+
+            plot(t,ft,'--b',t,rt,'--m',alfa,fx,'dr', 'LineWidth',3)
+            title('Gráfica de búsqueda de línea','Fontsize',16)
+            xlabel('EJE  T','Fontsize',16)
+            ylabel(' f(x + tp)','Fontsize',16  )
+            legend('f(x)','recta','punto')
+            pause
+        end
+
+        %              Fin de graficación
+        %-----------------------------------------
           
         W = [W x];
         x = x + alfa*p;  
         fx = feval(fname,x); 
         g = gradiente(fname,x);
         iter = iter + 1;
+        
     end      
-
 end
