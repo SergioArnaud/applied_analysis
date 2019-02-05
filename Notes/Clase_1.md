@@ -170,13 +170,15 @@ $$
 
 ###### Algoritmo
 
-$\overline{\hspace{ 10in}} \\ \textbf{Método de direcciones de desceso con Búsqueda de Linea} \\ \overline{\hspace{ 10in}}$
+$\overline{\hspace{ 10in}} \\ \textbf{Método de direcciones de desceso con Búsqueda de Linea} \\ \overline{\hspace{ 10in}}​$
 
-​	**Input: **     $x_0 \in \R^n$,  $0 < c_0 < c_1 < 0$ <br> 	**Output:** 	 $x^*$ <br>	$k \leftarrow 0$	<br>	**while** (  $\Vert \nabla f (x_k) \Vert_2 > 0$ )  <br>		Determinar $p_k \in \R^n$ tal que <br>			$\nabla f (x_k)^T p_k < 0 $<br>		Encontrar $t_k \geq 0$ tal que<br>			$g(t_k)\leq R_{c_1}(t_k)$<br>			$g'(t_k)\geq c_2g'(0)$<br>		$x_{k+1} \leftarrow x_k + t_k p_k$<br>		$k \leftarrow k+1$<br>$\overline{\hspace{ 10in}} $
+​	**Input: **     $x_0 \in \R^n​$,  $0 < c_0 < c_1 < 0​$ <br> 	**Output:** 	 $x^*​$ <br>	$k \leftarrow 0​$	<br>	**while** (  $\Vert \nabla f (x_k) \Vert_2 > 0​$ )  <br>		Determinar $p_k \in \R^n​$ tal que <br>			$\nabla f (x_k)^T p_k < 0 ​$<br>		Encontrar $t_k \geq 0​$ tal que<br>			$g(t_k)\leq R_{c_1}(t_k)​$<br>			$g'(t_k)\geq c_2g'(0)​$<br>		$x_{k+1} \leftarrow x_k + t_k p_k​$<br>		$k \leftarrow k+1​$<br>$\overline{\hspace{ 10in}} ​$
+
+
 
 ###### Teorema
 
-Sean $f : \R^n \to \R$, $x_k, p_k \in \R$ tales que
+Sean $f : \R^n \to \R​$, $x_k, p_k \in \R​$ tales que
 
 1. $f \in \mathcal{C}^1(\R^n)$ y $f$ está acotada inferiormente en  $\R^n$
 2. $\nabla f(x_k)^T p_k < 0$
@@ -246,17 +248,17 @@ $$
 
 ###### Algoritmo
 
-$\overline{\hspace{ 10in}} \\ \textbf{Búsqueda de línea} \\ \overline{\hspace{ 10in}}$
+$\overline{\hspace{ 10in}} \\ \textbf{Búsqueda de línea} \\ \overline{\hspace{ 10in}}​$
 
 ​	**Input: **     $x_0 \in \R^n$,  $0 < c_0 < c_1 < 0$ <br> 	**Output:** 	 $x^*$
 
-​	$k \leftarrow 0$	<br>	**while** (  $\Vert \nabla f (x_k) \Vert_2 > 0$ )  <br>		Determinar $p_k \in \R^n$ tal que <br>			$\nabla f (x_k)^T p_k < 0 $<br>		Encontrar $\alpha_k \geq 0$ tal que<br>			$f(x_k + \alpha_k p_k) \leq f(x_k) + \alpha_k(c_1 \nabla f(x_k)^\top p_k)$     (W1)<br>			$\nabla f(x_k + \alpha_k p_k)^\top p_k \geq c_2 (\nabla f x_k)^\top$                     (W2)<br>		$x_{k+1} \leftarrow x_k + t_k p_k$<br>		$k \leftarrow k+1$<br>$\overline{\hspace{ 10in}} $
+​	$k \leftarrow 0​$	<br>	**while** (  $\Vert \nabla f (x_k) \Vert_2 > 0​$ )  <br>		Determinar $p_k \in \R^n​$ tal que <br>			$\nabla f (x_k)^T p_k < 0 ​$<br>		Encontrar $\alpha_k \geq 0​$ tal que<br>			$f(x_k + \alpha_k p_k) \leq f(x_k) + \alpha_k(c_1 \nabla f(x_k)^\top p_k)​$     (W1)<br>			$\nabla f(x_k + \alpha_k p_k)^\top p_k \geq c_2 (\nabla f x_k)^\top​$                     (W2)<br>		$x_{k+1} \leftarrow x_k + t_k p_k​$<br>		$k \leftarrow k+1​$<br>$\overline{\hspace{ 10in}} ​$
 
 ###### Teorema
 
 ###### Hipótesis
 
-1. $f: \R^n \to \R$ continuamente diferenciable
+1. $f: \R^n \to \R​$ continuamente diferenciable
 2. $f(x)$ es acotada inferiormente
 3. $\nabla f(x)$ es Lipschitz continua
 
@@ -304,8 +306,8 @@ $$
 
 En el método de obtiene una sucesión $\{x_k\}$ tal que
 
-- $\nabla f(x_k) = 0​$ para algún $k \in \N​$
-- $\sum\limits_{k=0}^\infty \cos^2 \theta_k \Vert \nabla f_k \Vert_2^2  < \infty$
+- $y\nabla f(x_k) = 0$ para algún $k \in \N$
+- $\sum\limits_{k=0}^\infty \cos^2 \theta_k \Vert \nabla f_k \Vert_2^2 < \infty​$
 
 > ###### Demostración
 >
@@ -384,32 +386,108 @@ $$
 
 
 
+###### Observación (La dirección de Newton)
+
+$$
+\begin{align*}
+f: \R^n \to \R && &f \in \mathcal{C}^2(\R^n) \\ \\
+&& &\nabla f(x) \neq 0 \  \forall x \in \R^n \\ \\
+&& & \nabla^2f(x) \text{ Es simétrica positiva definida}
+\end{align*}
+$$
+
+- $p^\top (\nabla^2 (f ))p > 0 \quad \forall p \in \R^n, \quad p\neq 0$
+- $\lambda \in \R$ es un valor propio de $\nabla^2 f(x)$ se tiene que $\lambda > 0$
+
+$m(p) = \frac{1}{2}p^\top \nabla^2 f(x) + \nabla f(x)^\top p + f(x)$ $p \in \R^n$
+
+Su unico mínimo se obtiene cuando $\nabla m(p) = 0$ que se cuble cuando
+$$
+p^{\text{Newton}} = - (\nabla^2 f(x))^{-1} \nabla f(x)
+$$
+
+###### Teorema 
+
+Un vector $p\in \R^n$ satisface que $\nabla f(x)^\top p < 0$ si y solamente si existe $\mathbb{A} \in \mathcal{M}_{n \times n}$ simétrica positiva definida tal que 
+$$
+p = - \mathbb{A} \ \nabla f(x)
+$$
+
+> ###### Demostración
+>
+> ($\impliedby$) $p^\top \nabla f(x) = - (\nabla f(x)^\top \mathbb{A} \nabla f(x)) < 0 $
+>
+> ($\implies$) Se demostrará más adelante en el curso
+>
+>  
+>
+
+###### Discusión
+
+¿Por qué la dirección de Newton es la mejor dirección? En virtud del teorema anterior notemos que para cualquier punto en $\R^n$, de la infinidad de polinomios cuadrádicos que pasan por él, el que mejor aproxima a la función es el otorgado por el teorema de Taylor
 
 
 
+###### Ejercicio
+
+Decimos que $\mathbb{A} \in \mathcal{M}_{n\times n}​$ es positiva definida en $\R^n​$ si y solo si $x^\top \mathbb{A}x > 0​$ para todo $x \in \R^n − \{0\}​$. Construya en forma general una matiz $\mathbb{A} \in \mathcal{M}_{n\times n}​$ que sea positiva definida en $\R^n​$ y que no sea simétrica. 
+
+> ###### Solución
+>
+> $$
+> \begin{align*}
+> p^\top \mathbb{A} p &= \sum_{j=1}^n \sum_{i=1}^n a_{ij} p_i p_j > 0 && p\neq 0 \\
+> &= \sum_{i=1}^n a_{ii} p_i^2 + \sum_{j=1}^n \sum_{i=1 \\ i\neq j}^n a_{ij} p_i p_j
+> \end{align*}
+> $$
+>
+> Notemos que si pedimos $a_{ii} > 0 \forall i$ (por el primer sumando) obtenemos que $a_{ij} = - a_{ji} \forall i,j$, es decir, cualquier matriz antisimétrica con diagonal positiva es definida positiva. $_\square$
 
 
 
+###### Ejercicio
+
+Sean $x, p, s \in \R^n$ tales que $\nabla f(x)^\top p = \alpha < b = \nabla f(x)^\top s < 0$, con $\Vert p \Vert = \Vert s \Vert = 1$. Para $\gamma \in (\alpha, \beta)$ costruya un vector $p^*$ tal que 
+$$
+\nabla f(x)^\top p ^* = \gamma \quad y \quad \Vert p^* \Vert = 1
+$$
+
+> ###### Demostración
+>
+> Basta tomar
+> $$
+> r(t) = s + t(p - s) \quad t \in [0,1] \nonumber
+> $$
+> Luego
+> $$
+> \begin{align*}
+> r(t)^\top \nabla f(x) &= (s + t(p-s))^\top \nabla f(x)\\
+> &= (1-t)\beta + t\alpha < 0 \quad t \in [0,1]
+> \end{align*}
+> $$
+> Asimismo, definamos la función
+> $$
+> \begin{align*}
+> \xi (t) = r(t)^\top \nabla f(x) && \xi :[0,1] \to \R
+> \end{align*}
+> $$
+> Y notemos que es continua, $\xi(0) = \beta$ y $\xi(1) = \alpha$. Asi pues, como $\gamma \in (\alpha, \beta)$ se sigue del TVI que existe $t^*\in(0,1)$ tal que $\xi(t^*) = \gamma$, de esta forma tomemos $p^{**} = s + t^*(p-s)$. Concluimos obteniendo $p^* = \frac{p^{**}}{\Vert p^{**} \Vert}$ $_\square$ 
+>
+> 
 
 
 
+###### Ejercicio
 
+Demuestre que el problema
+$$
+\min_{\Vert p \Vert_1 = 1} \nabla f(x)^\top p
+$$
+Tiene como soluciones a los vectores canónicos $p^* = \pm e_i$, tales que $\nabla f(x)^\top p^* = - \Vert \nabla f(x) \Vert_\infty$
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-​			 			
+> ###### Demostración
+>
+> ###### 
 
 
 
