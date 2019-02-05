@@ -1,5 +1,3 @@
-
-
 ## Introducción
 
 ###### Definición.
@@ -39,15 +37,13 @@ $$
 
 ###### Teorema (condiciones necesarias de segundo orden).
 
-Sean $f : \R^n \to \R$, $x^* \in \R^n$ tales que $f \in \mathcal{C}^2(\R^n)$ y $x^*$ es un mínimo local de $f(x)$ entonces
+Sean $f : \R^n \to \R​$, $x^* \in \R^n​$ tales que $f \in \mathcal{C}^2(\R^n)​$ y $x^*​$ es un mínimo local de $f(x)​$ entonces
 $$
 \begin{align*}
 1) \ & \nabla f(x^*) = 0 \\
 2) \ & \nabla^2f(x^*) \ \text{Es simétrica semipositiva definida}
 \end{align*}
 $$
-
-
 
 ###### Teorema (condiciones suficientes de segundo orden).
 
@@ -77,7 +73,7 @@ Entonces $x^*$ es un mínimo local estricto de $f(x)​$
 > $$
 > Concluyendo $f(x^*) < f(x)$ $_\square$
 
-
+## Descenso por gradiente
 
 ###### Definición.
 
@@ -99,7 +95,7 @@ $$
 
 ###### Teorema
 
-Sean $f:\R^n \to \R$, $\alpha$, $p \in \R^n$ tales que $f \in \mathcal{C}'(\R^n)$, $\nabla f(x)^T p < 0 $ entonces existe $t^*>0$ tal que
+​		Sean $f:\R^n \to \R$, $\alpha$, $p \in \R^n$ tales que $f \in \mathcal{C}'(\R^n)$, $\nabla f(x)^T p < 0 $ entonces existe $t^*>0$ tal que
 $$
 f(\hat{x} + tp) < f(\hat{x}) \quad \quad \forall t \in (0,t*)
 $$
@@ -140,9 +136,9 @@ $$
 > \end{align*}
 > $$
 
+### Búsqueda de línea
 
-
-###### Observación (Búsqueda de línea)
+###### Discusión
 
 Consideremos la siguiente familia de rectas
 $$
@@ -170,34 +166,22 @@ g'(\hat{t}) \geq c_2 g'(0) \\
 0 < c_2 < c_1 < 1
 $$
 
+​				
 
-###### Algoritmo (Método de direcciones de desceso con Búsqueda de Linea)
+###### Algoritmo
 
-​	$x_0 \in \R^n​$
+$\overline{\hspace{ 10in}} \\ \textbf{Método de direcciones de desceso con Búsqueda de Linea} \\ \overline{\hspace{ 10in}}$
 
-​	$0 < c_0 < c_1 < 0$
-
-​	$k \leftarrow 0$​
-
-​	Mientras ($\Vert \nabla f (x_k) \Vert_2 > 0$)
-
-​		Determinar $p_k \in \R^n​$ tal que 
-
-​				$\nabla f (x_k)^T p_k < 0 $
-
-​		Encontrar $t_k \geq 0$ tal que
-
-​				$g(t_k)\leq R_{c_1}(t_k)$
-
-​				$g'(t_k)\geq c_2g'(0)$
-
-​		$x_{k+1} \leftarrow x_k + t_k p_k​$
-
-​		k $\leftarrow$ k+1				
+​	**Input: **     $x_0 \in \R^n$,  $0 < c_0 < c_1 < 0$ <br> 	**Output:** 	 $x^*$ <br>	$k \leftarrow 0$	<br>	**while** (  $\Vert \nabla f (x_k) \Vert_2 > 0$ )  <br>		Determinar $p_k \in \R^n$ tal que <br>			$\nabla f (x_k)^T p_k < 0 $<br>		Encontrar $t_k \geq 0$ tal que<br>			$g(t_k)\leq R_{c_1}(t_k)$<br>			$g'(t_k)\geq c_2g'(0)$<br>		$x_{k+1} \leftarrow x_k + t_k p_k$<br>		$k \leftarrow k+1$<br>$\overline{\hspace{ 10in}} $
 
 ###### Teorema
 
-Sean $f : \R^n \to \R$, $x_k, p_k \in \R$ tales que $f \in \mathcal{C}^1(\R^n)$ y $\nabla f(x_k)^T p_k < 0 $, $f$ es acotada inferiormente en $\R^n$, entonces existe $(\hat{t_1}, \hat{t_2}) \subset (0, \infty)$ tal que $\forall t \in (t_1,t_2)$ 
+Sean $f : \R^n \to \R$, $x_k, p_k \in \R$ tales que
+
+1. $f \in \mathcal{C}^1(\R^n)$ y $f$ está acotada inferiormente en  $\R^n$
+2. $\nabla f(x_k)^T p_k < 0$
+
+Entonces existe $(\hat{t_1}, \hat{t_2}) \subset (0, \infty)$ tal que $\forall t \in (t_1,t_2)$ se cumple
 $$
 \begin{align*}
 g(t) &\leq Rc_1(t) \\
@@ -207,7 +191,7 @@ $$
 
 > ###### Demostración
 >
-> Existe $\hat{t} >0$ tal que $g\hat{t} = R_{c_1}(\hat{t})$
+> Existe $\hat{t} >0​$ tal que $g\hat{t} = R_{c_1}(\hat{t})​$
 >
 > Notemos que
 > $$
@@ -260,11 +244,15 @@ $$
 
 
 
+###### Algoritmo
 
+$\overline{\hspace{ 10in}} \\ \textbf{Búsqueda de línea} \\ \overline{\hspace{ 10in}}$
 
-###### Algoritmo (Búsqueda de línea)
+​	**Input: **     $x_0 \in \R^n$,  $0 < c_0 < c_1 < 0$ <br> 	**Output:** 	 $x^*$
 
+​	$k \leftarrow 0$	<br>	**while** (  $\Vert \nabla f (x_k) \Vert_2 > 0$ )  <br>		Determinar $p_k \in \R^n$ tal que <br>			$\nabla f (x_k)^T p_k < 0 $<br>		Encontrar $\alpha_k \geq 0$ tal que<br>			$f(x_k + \alpha_k p_k) \leq f(x_k) + \alpha_k(c_1 \nabla f(x_k)^\top p_k)$     (W1)<br>			$\nabla f(x_k + \alpha_k p_k)^\top p_k \geq c_2 (\nabla f x_k)^\top$                     (W2)<br>		$x_{k+1} \leftarrow x_k + t_k p_k$<br>		$k \leftarrow k+1$<br>$\overline{\hspace{ 10in}} $
 
+###### Teorema
 
 ###### Hipótesis
 
@@ -303,8 +291,8 @@ $$
 > Nótese que la desigualdad se satisface si
 > $$
 > \begin{align*}
-> \nabla f_{k+1}^\top p_k &= c_2(\nabla f_k^\top p_k) \\ \\
-> p_k &= \beta (\nabla f_{k+1} - \nabla f_k \\ \\
+> \nabla f_{k+1}^\top p_k &= c_2(\nabla f_k^\top p_k) \\ 
+> p_k &= \beta (\nabla f_{k+1} - \nabla f_k \\ 
 > \Vert \nabla f_{k+1} - \nabla f_k \Vert_2 &= L \alpha_k \Vert p_k \Vert_2
 > \end{align*}
 > $$
@@ -316,7 +304,7 @@ $$
 
 En el método de obtiene una sucesión $\{x_k\}$ tal que
 
-- $\nabla f(x_k) = 0$ para algún $k \in \N$
+- $\nabla f(x_k) = 0​$ para algún $k \in \N​$
 - $\sum\limits_{k=0}^\infty \cos^2 \theta_k \Vert \nabla f_k \Vert_2^2  < \infty$
 
 > ###### Demostración
@@ -380,17 +368,18 @@ $$
 
 ###### Corolario
 
-Supongamos que generamos una sucesión $\{x_k\}$ tal que $\nabla f (x_k) \neq 0$ $\forall k$.  Con $\{x_k\} \subset \Omega$ compacto en $\R^n$
+Supongamos que generamos una sucesión $\{x_k\}​$ tal que $\nabla f (x_k) \neq 0​$ $\forall k​$.  Con $\{x_k\} \subset \Omega​$ compacto en $\R^n​$
 
 Sea $\beta > 0$ (pero cercano a cero) tal que
 $$
 \theta_k > \frac{\pi}{2} + \beta \quad \quad \forall k \in \N
 $$
 
-
-
-
-
+Si $\{x_k\} \subset \Omega $ es compacto en $\R^n$ entonces existe una subsucesión $\{x_{k'}\} \subset \{x_k\}$ tal que 
+$$
+\lim_{k' \to \infty } x_{k'} = x^*\\
+\nabla f(x^*) = 0 \
+$$
 
 
 
