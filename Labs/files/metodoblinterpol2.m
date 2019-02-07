@@ -1,7 +1,7 @@
 
 function [W,x,iter] = metodoblinterpol2(fname, x, method='newton', line_search='quadratic',
                                         plot_iterations = true, tol=1.e-04, maxiter = 50, 
-                                        maxjter = 300, c1 = 0.1)
+                                        maxjter = 30, c1 = 0.1)
 %{
     Método de búsqueda de línea con la primer condición de Wolfe
     usando máximo descenso.
@@ -27,12 +27,11 @@ function [W,x,iter] = metodoblinterpol2(fname, x, method='newton', line_search='
     W  = [x]; 
 
     while ( ng > tol && iter < maxiter &&  norm(p)> 1.e-04)
-
-        if (strcmp(method,'max'))
+        if (strncmp(method,'max',3))
             p = -g;
         end
 
-        if (strcmp(method,'newton'))
+        if (strncmp(method,'newton',6))
             H = hessian(fname,x);
             p = -H\g; 
         end
@@ -47,22 +46,23 @@ function [W,x,iter] = metodoblinterpol2(fname, x, method='newton', line_search='
         s  = p'*g;            
         jter = 0;             
 
+        
         if (abs(s) < 1.e-06)
-            disp('No existe suficiente descenso  ')
-            disp(sprintf('%2.0f  %2.10f',iter, s   ))
+            %disp('No existe suficiente descenso  ')
+            %disp(sprintf('%2.0f  %2.10f',iter, s   ))
             iter = maxiter; 
         end
+        
 
         while( (f1>f+alfa*c1*s) && jter < maxjter)  % búsqueda de línea
-        
-            if (strcmp(line_search,'linear'))
+            if (strncmp(line_search,'linear',6))
                 alfa = alfa/2;
                 xt = x + alfa*p;
                 f1 = feval(fname, xt);
                 jter = jter +1;
             end
             
-            if (strcmp(line_search,'quadratic'))
+            if (strncmp(line_search,'quadratic',9))
                 d2 = f1 - f - s;
                 alfa = -( s)/(2*d2);       
                 f1 = feval(fname, x + alfa*p);

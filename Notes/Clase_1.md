@@ -2,7 +2,7 @@
 
 ###### Definición.
 
-Decimos que $x^* \in \R^n​$ es un **mínimo local** de $f : \R^n \to \R​$ continua si y solo si existe $r>0​$ tal que
+Decimos que $x^* \in \R^n$ es un **mínimo local** de $f : \R^n \to \R$ continua si y solo si existe $r>0$ tal que
 $$
 f(x^*) \leq f(x) \\
 \forall x \in \R^n, \quad \Vert x^* - x \Vert_2 < r
