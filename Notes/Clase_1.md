@@ -1,4 +1,4 @@
-## Introducción
+# Introducción
 
 ###### Definición.
 
@@ -28,22 +28,50 @@ $$
 
 
 
+###### Teorema (Taylor)
+
+Sea $f: \R^n \to \R$ una función continua y diferenciable en $p\in \R^n$, entonces
+$$
+f(x+p) = f(x) + \nabla f(x + tp)^\top p \quad \quad \text{Para algún } t \in(0,1)
+$$
+Más aún, si f es doblemente diferencible tenemos
+$$
+\begin{align*}
+\nabla f(x+p) &= \nabla f(x) + \int_0^1 \nabla^2 f(x+tp)p  \ \text{dt} \\
+f(x+p) &= f(x) + \nabla f(x)^\top p + \frac{1}{2} p^\top \nabla^2 f(x+tp)p  && \exist t \in (0,1)
+\end{align*}
+$$
+
+
+
 ###### Teorema (condiciones necesarias de primer orden).
 
-Sean $f : \R^n \to \R​$, $x^* \in \R^n​$ tales que $f \in \mathcal{C}^1(\R^n)​$ y $x^*​$ es un mínimo local de $f(x)​$ entonces
+Sean $f : \R^n \to \R$, $x^* \in \R^n$ tales que $f \in \mathcal{C}^1(\R^n)$ y $x^*$ es un mínimo local de $f(x)​$ entonces
 $$
 \nabla f(x^*) = 0
 $$
 
+> ###### Demostración.
+>
+> Basta proceder por contradicción $\nabla f(x^*) \neq 0$ y aplicar el teorema de Taylor de primer orden con el punto $p = - \nabla f(x^*)$ notando que $p^\top \nabla f(x^*)  = -\Vert \nabla f(x^*) \Vert_1< 0$
+
+
+
 ###### Teorema (condiciones necesarias de segundo orden).
 
-Sean $f : \R^n \to \R​$, $x^* \in \R^n​$ tales que $f \in \mathcal{C}^2(\R^n)​$ y $x^*​$ es un mínimo local de $f(x)​$ entonces
+Sean $f : \R^n \to \R$, $x^* \in \R^n$ tales que $f \in \mathcal{C}^2(\R^n)$ y $x^*$ es un mínimo local de $f(x)$ entonces
 $$
 \begin{align*}
 1) \ & \nabla f(x^*) = 0 \\
 2) \ & \nabla^2f(x^*) \ \text{Es simétrica semipositiva definida}
 \end{align*}
 $$
+
+> ###### Demostración.
+>
+> Proceder de manera análoga al teorema anterior suponiendo que $\nabla^2 f(x^*)$ no es positiva semidefinida y utilizando el teorema de Taylor de segundo orden
+
+
 
 ###### Teorema (condiciones suficientes de segundo orden).
 
@@ -73,7 +101,7 @@ Entonces $x^*$ es un mínimo local estricto de $f(x)​$
 > $$
 > Concluyendo $f(x^*) < f(x)$ $_\square$
 
-## Descenso por gradiente
+# Descenso por gradiente
 
 ###### Definición.
 
@@ -83,6 +111,12 @@ $$
 $$
 
 ###### Observación
+
+En general, en cada iteración, además de decidire una dirección $p$ se debe decidir cuanto se avanza a lo largo de ella, la iteración está dada por
+$$
+x_{k+1} = x_k + \alpha_k p_k \nonumber
+$$
+Donde el escalar $\alpha_k$ es llamado la *logitud del paso*
 
 
 
@@ -136,7 +170,7 @@ $$
 > \end{align*}
 > $$
 
-### Búsqueda de línea
+## Búsqueda de línea
 
 ###### Discusión
 
@@ -151,7 +185,7 @@ $$
 Para cualquier $c_1 \in (0,1)$
 $$
 \begin{align*}
-R_{c_1} = g(0) + t(c_1 \cdot g'(0)) && \text{Wolfe 1} \\
+R_{c_1} = g(0) + t(c_1 \cdot g'(0)) && \text{(Wolfe 1)	} \\
 \end{align*}
 $$
 Escojemos $\hat{t} \geq 0​$ es tal que 
@@ -174,11 +208,39 @@ $\overline{\hspace{ 10in}} \\ \textbf{Método de direcciones de desceso con Bús
 
 ​	**Input: **     $x_0 \in \R^n​$,  $0 < c_0 < c_1 < 0​$ <br> 	**Output:** 	 $x^*​$ <br>	$k \leftarrow 0​$	<br>	**while** (  $\Vert \nabla f (x_k) \Vert_2 > 0​$ )  <br>		Determinar $p_k \in \R^n​$ tal que <br>			$\nabla f (x_k)^T p_k < 0 ​$<br>		Encontrar $t_k \geq 0​$ tal que<br>			$g(t_k)\leq R_{c_1}(t_k)​$<br>			$g'(t_k)\geq c_2g'(0)​$<br>		$x_{k+1} \leftarrow x_k + t_k p_k​$<br>		$k \leftarrow k+1​$<br>$\overline{\hspace{ 10in}} ​$
 
+#### Condiciones de Wolfe
 
+###### Definición (Wolfe 1)
+
+La *primer condición de Wolfe* -también conocida como la condición de armijo- estipula que el tamaño de paso elegido $\alpha_k$ debe otorgar *suficiente decrecimiento* en la función objetivo, medido por
+$$
+f(x_k + \alpha p_k) \leq f(x_k) + c_1\alpha \nabla f_k^\top p_k \quad \quad \exists \ c_i \in (0,1)
+$$
+
+
+![image-20190208002057266](assets/image-20190208002057266.png)
+
+
+
+###### Definción (Wolfe 2)
+
+La *segunda condición de Wolfe* -también conocida. como la condición de curvatura- estipula que la pendiente de la función en el punto alcanzado por el paso debe ser $c_2$ veces mayor que la pendiente en el punto inicial, esto para asegurar que no estamos dando pasos *muy cortos*, medido por
+$$
+\nabla f(x + \alpha_k p_k)^\top p_k \geq c_2 \nabla f_k^\top p_k
+$$
+
+
+![image-20190208002109979](assets/image-20190208002109979.png)
+
+
+
+###### Observación
+
+A continuación veremos que si tenemos una función clase $\mathcal{C}^1$ acotada inferiormente, una dirección de descenso y consideramos $0 < c_1 < c_2 < 0$, entonces existe un intervalo de logitudes de paso que cumplen las dos condiciones de Wolfe.
 
 ###### Teorema
 
-Sean $f : \R^n \to \R​$, $x_k, p_k \in \R​$ tales que
+Sean $f : \R^n \to \R$, $x_k, p_k \in \R$ tales que
 
 1. $f \in \mathcal{C}^1(\R^n)$ y $f$ está acotada inferiormente en  $\R^n$
 2. $\nabla f(x_k)^T p_k < 0$
@@ -252,17 +314,19 @@ $\overline{\hspace{ 10in}} \\ \textbf{Búsqueda de línea} \\ \overline{\hspace
 
 ​	**Input: **     $x_0 \in \R^n$,  $0 < c_0 < c_1 < 0$ <br> 	**Output:** 	 $x^*$
 
-​	$k \leftarrow 0​$	<br>	**while** (  $\Vert \nabla f (x_k) \Vert_2 > 0​$ )  <br>		Determinar $p_k \in \R^n​$ tal que <br>			$\nabla f (x_k)^T p_k < 0 ​$<br>		Encontrar $\alpha_k \geq 0​$ tal que<br>			$f(x_k + \alpha_k p_k) \leq f(x_k) + \alpha_k(c_1 \nabla f(x_k)^\top p_k)​$     (W1)<br>			$\nabla f(x_k + \alpha_k p_k)^\top p_k \geq c_2 (\nabla f x_k)^\top​$                     (W2)<br>		$x_{k+1} \leftarrow x_k + t_k p_k​$<br>		$k \leftarrow k+1​$<br>$\overline{\hspace{ 10in}} ​$
+​	$k \leftarrow 0$	<br>	**while** (  $\Vert \nabla f (x_k) \Vert_2 > 0$ )  <br>		Determinar $p_k \in \R^n$ tal que <br>			$\nabla f (x_k)^T p_k < 0 $<br>		Encontrar $\alpha_k \geq 0$ tal que<br>			$f(x_k + \alpha_k p_k) \leq f(x_k) + \alpha_k(c_1 \nabla f(x_k)^\top p_k)$     (W1)<br>			$\nabla f(x_k + \alpha_k p_k)^\top p_k \geq c_2 (\nabla f x_k)^\top$                     (W2)<br>		$x_{k+1} \leftarrow x_k + t_k p_k$<br>		$k \leftarrow k+1$<br>$\overline{\hspace{ 10in}} $
 
-###### Teorema
+#### Condiciones de Goldstein
 
-###### Hipótesis
-
-1. $f: \R^n \to \R​$ continuamente diferenciable
-2. $f(x)$ es acotada inferiormente
-3. $\nabla f(x)$ es Lipschitz continua
+#### Convergencia del método
 
 ###### Lema
+
+Supongamos que 
+
+1. $f: \R^n \to \R$ continuamente diferenciable
+2. $f(x)$ es acotada inferiormente
+3. $\nabla f(x)$ es Lipschitz continua
 
 Si la segunda confición de Wolfe se satisface, entonces
 $$
@@ -385,8 +449,10 @@ $$
 
 
 
+#### Dirección de Newton
 
-###### Observación (La dirección de Newton)
+
+###### Discusión
 
 $$
 \begin{align*}
@@ -428,72 +494,7 @@ $$
 
 
 
-###### Ejercicio
-
-Decimos que $\mathbb{A} \in \mathcal{M}_{n\times n}​$ es positiva definida en $\R^n​$ si y solo si $x^\top \mathbb{A}x > 0​$ para todo $x \in \R^n − \{0\}​$. Construya en forma general una matiz $\mathbb{A} \in \mathcal{M}_{n\times n}​$ que sea positiva definida en $\R^n​$ y que no sea simétrica. 
-
-> ###### Solución
->
-> $$
-> \begin{align*}
-> p^\top \mathbb{A} p &= \sum_{j=1}^n \sum_{i=1}^n a_{ij} p_i p_j > 0 && p\neq 0 \\
-> &= \sum_{i=1}^n a_{ii} p_i^2 + \sum_{j=1}^n \sum_{i=1 \\ i\neq j}^n a_{ij} p_i p_j
-> \end{align*}
-> $$
->
-> Notemos que si pedimos $a_{ii} > 0 \forall i$ (por el primer sumando) obtenemos que $a_{ij} = - a_{ji} \forall i,j$, es decir, cualquier matriz antisimétrica con diagonal positiva es definida positiva. $_\square$
-
-
-
-###### Ejercicio
-
-Sean $x, p, s \in \R^n$ tales que $\nabla f(x)^\top p = \alpha < b = \nabla f(x)^\top s < 0$, con $\Vert p \Vert = \Vert s \Vert = 1$. Para $\gamma \in (\alpha, \beta)$ costruya un vector $p^*$ tal que 
-$$
-\nabla f(x)^\top p ^* = \gamma \quad y \quad \Vert p^* \Vert = 1
-$$
-
-> ###### Demostración
->
-> Basta tomar
-> $$
-> r(t) = s + t(p - s) \quad t \in [0,1] \nonumber
-> $$
-> Luego
-> $$
-> \begin{align*}
-> r(t)^\top \nabla f(x) &= (s + t(p-s))^\top \nabla f(x)\\
-> &= (1-t)\beta + t\alpha < 0 \quad t \in [0,1]
-> \end{align*}
-> $$
-> Asimismo, definamos la función
-> $$
-> \begin{align*}
-> \xi (t) = r(t)^\top \nabla f(x) && \xi :[0,1] \to \R
-> \end{align*}
-> $$
-> Y notemos que es continua, $\xi(0) = \beta$ y $\xi(1) = \alpha$. Asi pues, como $\gamma \in (\alpha, \beta)$ se sigue del TVI que existe $t^*\in(0,1)$ tal que $\xi(t^*) = \gamma$, de esta forma tomemos $p^{**} = s + t^*(p-s)$. Concluimos obteniendo $p^* = \frac{p^{**}}{\Vert p^{**} \Vert}$ $_\square$ 
->
-> 
-
-
-
-###### Ejercicio
-
-Demuestre que el problema
-$$
-\min_{\Vert p \Vert_1 = 1} \nabla f(x)^\top p
-$$
-Tiene como soluciones a los vectores canónicos $p^* = \pm e_i$, tales que $\nabla f(x)^\top p^* = - \Vert \nabla f(x) \Vert_\infty$
-
-> ###### Demostración
->
-> ###### 
-
-
-
-
-
-
+#### Métodos de selección de tamaño de paso
 
 
 
