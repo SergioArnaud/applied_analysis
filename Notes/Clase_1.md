@@ -4,8 +4,7 @@
 
 Decimos que $x^* \in \R^n$ es un **mínimo local** de $f : \R^n \to \R$ continua si y solo si existe $r>0$ tal que
 $$
-f(x^*) \leq f(x) \\
-\forall x \in \R^n, \quad \Vert x^* - x \Vert_2 < r
+f(x^*) \leq f(x) \\\forall x \in \R^n, \quad \Vert x^* - x \Vert_2 < r
 $$
 
 ###### Definición.
@@ -30,11 +29,11 @@ $$
 
 ###### Teorema (Taylor)
 
-Sea $f: \R^n \to \R$ una función continua y diferenciable en $p\in \R^n$, entonces
+Sea $f: \R^n \to \R$ una función $\mathcal{C^1}$ en $p\in \R^n$, entonces
 $$
 f(x+p) = f(x) + \nabla f(x + tp)^\top p \quad \quad \text{Para algún } t \in(0,1)
 $$
-Más aún, si f es doblemente diferencible tenemos
+Más aún, si $f$ es $\mathcal{C^2}$ tenemos
 $$
 \begin{align*}
 \nabla f(x+p) &= \nabla f(x) + \int_0^1 \nabla^2 f(x+tp)p  \ \text{dt} \\
@@ -112,7 +111,7 @@ $$
 
 ###### Observación
 
-En general, en cada iteración, además de decidire una dirección $p$ se debe decidir cuanto se avanza a lo largo de ella, la iteración está dada por
+En general, en cada iteración, además de decidire una dirección $p​$ se debe decidir cuanto se avanza a lo largo de ella, la iteración está dada por
 $$
 x_{k+1} = x_k + \alpha_k p_k \nonumber
 $$
@@ -224,7 +223,7 @@ $$
 
 ###### Definción (Wolfe 2)
 
-La *segunda condición de Wolfe* -también conocida. como la condición de curvatura- estipula que la pendiente de la función en el punto alcanzado por el paso debe ser $c_2$ veces mayor que la pendiente en el punto inicial, esto para asegurar que no estamos dando pasos *muy cortos*, medido por
+La *segunda condición de Wolfe* -también conocida. como la condición de curvatura- estipula que la pendiente de la función en el punto alcanzado por el paso debe ser $c_2​$ veces mayor que la pendiente en el punto inicial, esto para asegurar que no estamos dando pasos *muy cortos*, medido por
 $$
 \nabla f(x + \alpha_k p_k)^\top p_k \geq c_2 \nabla f_k^\top p_k
 $$
@@ -236,7 +235,7 @@ $$
 
 ###### Observación
 
-A continuación veremos que si tenemos una función clase $\mathcal{C}^1$ acotada inferiormente, una dirección de descenso y consideramos $0 < c_1 < c_2 < 0$, entonces existe un intervalo de logitudes de paso que cumplen las dos condiciones de Wolfe.
+A continuación veremos que si tenemos una función clase $\mathcal{C}^1$ acotada inferiormente, una dirección de descenso y consideramos $0 < c_1 < c_2 < 0​$, entonces existe un intervalo de logitudes de paso que cumplen las dos condiciones de Wolfe.
 
 ###### Teorema
 
@@ -434,7 +433,7 @@ $$
 
 ###### Corolario
 
-Supongamos que generamos una sucesión $\{x_k\}​$ tal que $\nabla f (x_k) \neq 0​$ $\forall k​$.  Con $\{x_k\} \subset \Omega​$ compacto en $\R^n​$
+Supongamos que generamos una sucesión $\{x_k\}$ tal que $\nabla f (x_k) \neq 0$ $\forall k$.  Con $\{x_k\} \subset \Omega$ compacto en $\R^n​$
 
 Sea $\beta > 0$ (pero cercano a cero) tal que
 $$
@@ -494,7 +493,7 @@ $$
 
 
 
-#### Métodos de selección de tamaño de paso
+###### Métodos de selección de tamaño de paso
 
 
 
