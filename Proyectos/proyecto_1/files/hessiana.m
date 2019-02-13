@@ -1,4 +1,4 @@
-function [H] = hessiana(f, x, h = 1.e-05)
+function [H] = hessiana(f, x, h = 1.e-07)
 
     n = length(x);
     H = zeros(n);

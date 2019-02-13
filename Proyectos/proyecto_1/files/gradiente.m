@@ -1,4 +1,4 @@
-function  [gfx] = gradiente(f, x, h = 1.e-08)
+function  [gfx] = gradiente(f, x, h = 1.e-07)
 
 %{
     Aproximacion del gradiente por diferencias hacia adelante 

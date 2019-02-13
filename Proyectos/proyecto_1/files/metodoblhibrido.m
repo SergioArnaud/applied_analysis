@@ -30,20 +30,21 @@ function [W,x,iter] = metodoblhibrido(f, x, method='newton', tol=1.e-08,
 
         if (strcmp(method,'newton'))
             H = hessiana(f,x);
-            H = (H' + H)/2;
-            p = - chol(H) \g; 
+            %if (all(eig(H) > 1.e-08))
+            %    p = - chol(H) \g; 
+            %else
+                p = -H\g;
+            %end
         end
 
         %-----------------------------------------
         %            Búsqueda híbrida
         
-        alfa_back = 1; alfa_inter =1; 
+        alfa = 1;
+        alfa_back = 1; alfa_inter = 1; 
         jter = 0;   
         
         f_x  = f(x);
-        xt   = x + p;        
-        f1   = f(xt);
-                  
         s  = p'*g;  
         %if (abs(s) < 1.e-12)
         %    disp('No existe suficiente descenso  ')
@@ -55,12 +56,14 @@ function [W,x,iter] = metodoblhibrido(f, x, method='newton', tol=1.e-08,
                 
             %-----------------------------------------
             %           Paso Backtracking
-            alfa_back = alfa_back/2;
+            alfa_back = alfa/2;
             f_back  = f(x + alfa_back*p);
             wolfe_back = false;
             
             %-----------------------------------------
             %           Paso Interpolación
+            
+            f1   = f(x + alfa*p);
             d2 = f1 - f_x - s;
             alfa_inter = -(s)/(2*d2); 
             f_inter =f(x + alfa_inter*p);
@@ -74,41 +77,34 @@ function [W,x,iter] = metodoblhibrido(f, x, method='newton', tol=1.e-08,
             
             %-----------------------------------------
             %    Paso interpolación cumple W1
-            if (f_inter <= f_x+ alfa_inter*c1*s)
+            if (f_inter <= f_x + alfa_inter*c1*s)
                 wolfe_inter = true;
             end
             
             if (wolfe_back && wolfe_inter)
                 %a = 'las dos'
-                %jter
                 alfa = max(alfa_back,alfa_inter);
             elseif(wolfe_inter)
                 %a = 'inter'
-                %jter
                 alfa = alfa_inter;
             elseif(wolfe_back)
                 %a = 'backtrack'
-                %jter
                 alfa = alfa_back;
+            else
+                alfa = min(alfa_back, alfa_inter);
             end
             
-            if (jter > maxjter) 
+            if (jter > maxjter || norm(alfa*p) < 1.e-3) 
                 alfa = 1.e-2;
                 break;
             end
             
             if (wolfe_back || wolfe_inter)
-                break;
+                break
             end
              
-            f1   = f(x + alfa_inter*p);
             jter = jter +1;
         end   
-        
-        if ((norm(alfa*p) < 1.e-3) || (jter > maxjter) )
-            alfa = 1.e-2;
-        end
-        
         %          Fin de búsqueda híbrida
         %------------------------------------------
           
